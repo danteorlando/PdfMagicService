@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PdfMagicService", "PdfMagicService\PdfMagicService.csproj", "{31376EFC-D7E5-45F3-9111-1C819E6BFB66}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PdfMagicService.Tests", "PdfMagicService.Tests\PdfMagicService.Tests.csproj", "{BF1EACCB-1FB5-46C3-AAEB-11AA1E04710E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PdfMagic.Model", "PdfMagic.Model\PdfMagic.Model.csproj", "{705C3163-B984-4B1D-A242-B5BAAC0EAB47}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{31376EFC-D7E5-45F3-9111-1C819E6BFB66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31376EFC-D7E5-45F3-9111-1C819E6BFB66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31376EFC-D7E5-45F3-9111-1C819E6BFB66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31376EFC-D7E5-45F3-9111-1C819E6BFB66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF1EACCB-1FB5-46C3-AAEB-11AA1E04710E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF1EACCB-1FB5-46C3-AAEB-11AA1E04710E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF1EACCB-1FB5-46C3-AAEB-11AA1E04710E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF1EACCB-1FB5-46C3-AAEB-11AA1E04710E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{705C3163-B984-4B1D-A242-B5BAAC0EAB47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{705C3163-B984-4B1D-A242-B5BAAC0EAB47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{705C3163-B984-4B1D-A242-B5BAAC0EAB47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{705C3163-B984-4B1D-A242-B5BAAC0EAB47}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
