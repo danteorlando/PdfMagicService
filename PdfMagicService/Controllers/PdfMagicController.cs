@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web.Http;
@@ -103,6 +106,28 @@ namespace PdfMagicService.Controllers
             return forms;
         }
 
+        [HttpPost]
+        public HttpResponseMessage Fill(int Id, string data)
+        {
+            MemoryStream ms = new MemoryStream();
+            
+            // processing the stream.
+
+            HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new ByteArrayContent(ms.ToArray())
+            };
+
+            result.Content.Headers.ContentDisposition =
+                new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment")
+                {
+                    FileName = "filled.pdf"
+                };
+            result.Content.Headers.ContentType =
+                new MediaTypeHeaderValue("application/octet-stream");
+
+            return result;
+        }
         private List<FormField> GetFields(string fileName)
         {
             List<FormField> fields = new List<FormField>();
