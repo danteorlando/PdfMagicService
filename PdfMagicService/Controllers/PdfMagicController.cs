@@ -107,25 +107,63 @@ namespace PdfMagicService.Controllers
         }
 
         [HttpPost]
-        public HttpResponseMessage Fill(int Id, string data)
+        public HttpResponseMessage Fill(Form form)
         {
-            MemoryStream ms = new MemoryStream();
-            
-            // processing the stream.
-
-            HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK)
+            HttpResponseMessage result = new HttpResponseMessage();
+            try
             {
-                Content = new ByteArrayContent(ms.ToArray())
-            };
+                const string pdfkPath = "pdftk.exe";
+                string fdf = "%FDF-1.2 \n 1 0 obj \n <</FDF << /Fields[\n";
 
-            result.Content.Headers.ContentDisposition =
-                new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment")
+                foreach (FormField fld in form.Fields)
                 {
-                    FileName = "filled.pdf"
-                };
-            result.Content.Headers.ContentType =
-                new MediaTypeHeaderValue("application/octet-stream");
+                    fdf += "<< /T(" + fld.FieldName + ")/V(" + fld.FieldValue + ")>>\n ";
+                }
 
+                fdf += "] >> >> \n";
+                fdf += "endobj \n";
+                fdf += "trailer \n";
+                fdf += "<</Root 1 0 R>> \n";
+                fdf += "%% EOF \n";
+
+                File.WriteAllText(@"D:\\dev\\PdfMagicService\\PdfMagicService\\Forms\\data.fdf", fdf);
+
+                switch (form.Id)
+                {
+                    case 5:
+                        string a = @"D:\\dev\\PdfMagicService\\PdfMagicService\\Forms\\SAR7_NP.pdf fill_form D:\\dev\\PdfMagicService\\PdfMagicService\\Forms\\data.fdf output D:\\dev\\PdfMagicService\\PdfMagicService\\Forms\\sar7_filled.pdf";
+                        Process p = new Process();
+                        p.StartInfo.WorkingDirectory = Environment.CurrentDirectory;
+                        p.StartInfo.FileName = pdfkPath;
+                        p.StartInfo.Arguments = a;
+                        p.StartInfo.RedirectStandardOutput = true;
+                        p.StartInfo.UseShellExecute = false;
+                        p.Start();
+                        p.WaitForExit();
+                        break;
+                }
+
+
+                MemoryStream ms = new MemoryStream(File.ReadAllBytes("D:\\dev\\PdfMagicService\\PdfMagicService\\Forms\\sar7_filled.pdf"));
+
+                // processing the stream.
+
+                result = new HttpResponseMessage(HttpStatusCode.OK)
+                {
+                    Content = new ByteArrayContent(ms.ToArray())
+                };
+
+                result.Content.Headers.ContentDisposition =
+                    new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment")
+                    {
+                        FileName = "filled.pdf"
+                    };
+                result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+            }
+            catch (Exception ex)
+            {
+
+            }
             return result;
         }
         private List<FormField> GetFields(string fileName)

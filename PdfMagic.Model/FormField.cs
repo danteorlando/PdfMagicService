@@ -10,5 +10,7 @@ namespace PdfMagic.Model
     {
         public string FieldType { get; set; }
         public string FieldName { get; set; }
+
+        public string FieldValue { get; set; }
     }
 }
